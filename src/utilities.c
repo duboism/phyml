@@ -6288,6 +6288,9 @@ void Swap_Partial_Lk(t_edge *a, t_edge *b, int side_a, int side_b, t_tree *tree)
   phydbl *buff_p_lk_tip;
   int *buff_ui;
   
+#ifdef BEAGLE
+  int temp;
+#endif
   
   if(side_a == LEFT && side_b == LEFT)
     {

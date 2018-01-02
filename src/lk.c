@@ -2297,8 +2297,8 @@ void Update_PMat_At_Given_Edge(t_edge *b_fcus, t_tree *tree)
       
       //
       len = MAX(0.0, b_fcus->l->v) * tree->mod->br_len_mult->v;
-      int p_matrices[1]     = b_fcus->Pij_rr_idx;
-      double branch_lens[1] = len;
+      int p_matrices[1]     = {b_fcus->Pij_rr_idx};
+      double branch_lens[1] = {len};
       int ret = beagleUpdateTransitionMatrices(tree->b_inst,0,p_matrices,NULL,NULL,branch_lens,1);
       if(ret<0)
         {
