@@ -205,21 +205,23 @@ void update_beagle_partials(t_tree* tree, t_edge* b, t_node* d)
   t_node *n_v1, *n_v2;//d's "left" and "right" neighbor nodes
   phydbl *p_lk,*p_lk_v1,*p_lk_v2;
   phydbl *Pij1,*Pij2;
+  phydbl *tPij1,*tPij2;
   int *sum_scale, *sum_scale_v1, *sum_scale_v2;
   int *p_lk_loc;
   int dest_p_idx, child1_p_idx, child2_p_idx, Pij1_idx, Pij2_idx;
   n_v1 = n_v2                 = NULL;
   p_lk = p_lk_v1 = p_lk_v2    = NULL;
   Pij1 = Pij2                 = NULL;
+  tPij1 = tPij2               = NULL;
   sum_scale_v1 = sum_scale_v2 = NULL;
   p_lk_loc                    = NULL;
   dest_p_idx = child1_p_idx = child2_p_idx = Pij1_idx = Pij2_idx = UNINITIALIZED;
-  Set_All_P_Lk(&n_v1,&n_v2,
-               &p_lk,&sum_scale,&p_lk_loc,
-               &Pij1,&p_lk_v1,&sum_scale_v1,
-               &Pij2,&p_lk_v2,&sum_scale_v2,
-               d,b,tree,
-               &dest_p_idx, &child1_p_idx, &child2_p_idx, &Pij1_idx, &Pij2_idx);
+  Set_All_Partial_Lk(&n_v1,&n_v2,
+                     &p_lk,&sum_scale,&p_lk_loc,
+                     &Pij1,&tPij1,&p_lk_v1,&sum_scale_v1,
+                     &Pij2,&tPij2,&p_lk_v2,&sum_scale_v2,
+                     d,b,tree,
+                     &dest_p_idx, &child1_p_idx, &child2_p_idx, &Pij1_idx, &Pij2_idx);
   
   
   //    fprintf(stdout, "\nUpdating partials on Branch %d (on the side where Node %d lies)\n",b->num,d->num);fflush(stdout);
