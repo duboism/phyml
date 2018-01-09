@@ -19,24 +19,6 @@ double* int_to_double(const int* src, int num_elems)
     return dest;
 }
 
-double* short_to_double(const short* src, int num_elems)
-{
-    double* dest = (double*)malloc(num_elems*sizeof(double)); if (NULL==dest) Warn_And_Exit("\n. Couldn't allocate memory. \n");
-    int i;
-    for(i=0; i<num_elems;++i)
-        dest[i] = (double)src[i];
-    return dest;
-}
-
-double* float_to_double(const phydbl* src, int num_elems)
-{
-    double* dest = (double*)malloc(num_elems*sizeof(double)); if (NULL==dest) Warn_And_Exit("\n. Couldn't allocate memory. \n");
-    int i;
-    for(i=0; i<num_elems;++i)
-        dest[i] = (double)src[i];
-    return dest;
-}
-
 void print_beagle_flags(long inFlags) {
     if (inFlags & BEAGLE_FLAG_PROCESSOR_CPU)      fprintf(stdout, " PROCESSOR_CPU");
     if (inFlags & BEAGLE_FLAG_PROCESSOR_GPU)      fprintf(stdout, " PROCESSOR_GPU");
@@ -148,7 +130,7 @@ int create_beagle_instance(t_tree *tree, int quiet, option* io)
         if(tree->a_nodes[i]->tax)
           {
             assert(tree->a_nodes[i]->c_seq->len == tree->n_pattern); // number of compacts sites == number of distinct site patterns
-            double* tip = short_to_double(tree->a_nodes[i]->b[0]->p_lk_tip_r, tree->n_pattern*tree->mod->ns); //The tip states are stored on the branch leading to the tip
+            double* tip = tree->a_nodes[i]->b[0]->p_lk_tip_r; //The tip states are stored on the branch leading to the tip
             //Recall we store tip partials on the branch leading to the tip, rather than the tip itself.
             int ret = beagleSetTipPartials(beagle_inst, tree->a_nodes[i]->b[0]->p_lk_tip_idx, tip);
             if(ret<0){
@@ -161,7 +143,7 @@ int create_beagle_instance(t_tree *tree, int quiet, option* io)
       }
     
     //Set the pattern weights
-    double* pwts = int_to_double(tree->data->wght,tree->n_pattern); //BTW, These weights are absolute counts, and not freqs
+    double* pwts = tree->data->wght; //BTW, These weights are absolute counts, and not freqs
     int ret = beagleSetPatternWeights(beagle_inst, pwts);
     if(ret<0){
       fprintf(stderr, "beagleSetPatternWeights() on instance %i failed:%i\n\n",beagle_inst,ret);

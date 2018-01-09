@@ -68,8 +68,6 @@ void update_beagle_ras(t_mod* mod);
 void update_beagle_efrqs(t_mod* mod);
 void update_beagle_eigen(t_mod* mod);
 void calc_edgelks_beagle(t_edge* b, t_tree* tree);
-double* int_to_double(const int* src, int num_elems);
-double* short_to_double(const short* src, int num_elems);
 double* float_to_double(const phydbl *src, int num_elems);
 
 
