@@ -576,6 +576,7 @@ nexus.c nexus.h\
 init.c init.h\
 xml.c xml.h\
 mixt.c mixt.h\
+date.c date.h\
 beagle_utils.c beagle_utils.h
 phyml_beagle_LDADD = -lm -lhmsbeagle
 else
